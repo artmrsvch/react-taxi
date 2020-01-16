@@ -1,24 +1,42 @@
 import React from 'react';
 import './App.scss';
 import Login from './login/Login';
+import Profile from './profile/profile';
 import Header from './header/Header';
+
+
 
 class App extends React.Component {
     constructor(props) {
       super(props);
-      this.state = {}
+      this.state = {setState: 'login'}
+      this.handleClick = this.handleClick.bind(this);
     }
     
-    nowState(e) {
-      console.log(e)
+    handleClick(page, target) {
+      for(let child of target.parentElement.children) {
+          child.classList.remove('active')
+      }
+      target.classList.add('active')
+      this.setState({
+          setState: page
+      }) 
     }
-    componentDidMount() {
+
+    renderDynamicPage(page) {
+      switch (page) {
+        case 'profile': return <Profile />
+        case 'login': return <Login />
+
+        default: return <div className="default"><h1 className="title">Страница пока не создана</h1></div>
+      }   
     }
+
     render() {
       return (
         <div className="App">
-          <Header setState={'login'} onLoad={this.nowState(Header.props)} />
-          <Login />
+          <Header setState={'login'} handle={this.handleClick} />
+          {this.renderDynamicPage(this.state.setState)}
         </div>
       );
     } 
