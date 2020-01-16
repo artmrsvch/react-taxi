@@ -5,3 +5,15 @@
 .Login {
     flex: 1;
 }
+.Login-form {
+    display: flex;
+}
+.Login-btn {
+    border: 2px red solid;
+    border-radius: 5px;
+    padding: 5px;
+    margin-left: 10px;
+}
+.Login-inputs__userName {
+    margin-right: 10px;
+}

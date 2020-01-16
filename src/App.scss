@@ -4,6 +4,7 @@ button {
   background: none;
   font-size: inherit;
   color: inherit;
+  cursor: pointer;
 }
 .App {
   display: flex;
@@ -29,7 +30,6 @@ button {
   padding: 0 10px;
 }
 .App-nav__item {
-  cursor: pointer;
   margin-right: 10px;
 
   &:last-child {
