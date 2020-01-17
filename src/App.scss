@@ -1,10 +1,22 @@
 button {
+  padding: 0;
   border: none;
   outline: none;
   background: none;
   font-size: inherit;
   color: inherit;
   cursor: pointer;
+}
+input {
+  border: none;
+  outline: none;
+  border-bottom: 2px solid #eaeaea;
+  &:focus {
+    border-bottom: 2px solid #1473e6;
+  }
+}
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
 }
 .App {
   display: flex;

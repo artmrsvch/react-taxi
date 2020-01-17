@@ -1,25 +1,24 @@
 import React from 'react';
 import './login.scss';
+import ButtonAutoriz from '../components/ButtonAutoriz'
+import Input from '../components/Input'
 
 class Login extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            handleClick: props.handle
-        }
-    }
     render() {
         return (
-            <div className="Login">
-                <h1 className="title">Login</h1>
-                <form className="Login-form" onSubmit={()=>this.state.handleClick('map')}>
-                    <div className="Login-form__inp-block">
-                        <input type="text" className="Login-inputs__userName" placeholder="Введите логин"/>
-                        <input type="text" className="Login-inputs__userPass" placeholder="Введите пароль"/>
+            <section className="section-login">
+                <div className="login">
+                    <div className="login-descript">
+                        <h1 className="login-descript__title">Войти</h1>
+                        <button className="login-descript__subtitle">Зарегистрируйтесь</button>
                     </div>
-                    <button className="Login-btn" type="submit">Отправить</button>
-                </form>
-            </div>
+                    <form className="login-form" onSubmit={()=>this.props.handle('map')}>
+                        <Input descript="Имя пользователя*" type="text" setClass="login-form__inp_userName"/>
+                        <Input descript="Пароль*" type="password" setClass="login-form__inp_userPass"/>
+                        <ButtonAutoriz forms="Войти" />
+                    </form>
+                </div>
+            </section>
         )
     }
 }
