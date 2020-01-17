@@ -9,40 +9,33 @@ import Header from './header/Header';
 
 
 class App extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {setState: 'login'}
-        this.handleClick = this.handleClick.bind(this);
-    }
-    
-    handleClick(page) {
+    state = {activePage: 'login'}
+
+    handleClick = (page)=> {
         this.setState({
-            setState: page
+            activePage: page
         }) 
     }
 
     renderDynamicPage(page) {
-        switch (page) {
-            case 'profile': return <Profile />
-            case 'login': return <Login handle={this.handleClick}/>
-            case 'map': return <Map />
-            case 'signin': return <SignIN handle={this.handleClick}/>
-
-            default: return <div className="default"><h1 className="title">Страница пока не создана</h1></div>
-        }   
+        const obj = {
+            profile: ()=><Profile />,
+            login: ()=><Login handle={this.handleClick}/>,
+            map: ()=><Map />,
+            signin: ()=><SignIN handle={this.handleClick}/>
+        }
+        
+        return obj[page]()
     }
 
     render() {
         return (
             <div className="App">
-              <Header setState={this.state.setState} handle={this.handleClick} />
-              {this.renderDynamicPage(this.state.setState)}
+              <Header activePage={this.state.activePage} handle={this.handleClick} />
+              {this.renderDynamicPage(this.state.activePage)}
             </div>
         );
     } 
-
-
-
 }
 
 export default App;
