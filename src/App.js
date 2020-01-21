@@ -1,15 +1,19 @@
 import React, {useState} from 'react';
-import PropTypes from 'prop-types';
 import './App.scss';
 import Sign from './login/Login';
 import Profile from './profile/profile';
 import Map from './map/map';
-import SignIN from './signIn/signin';
 import Header from './header/Header';
 
+const Status = React.createContext();
 
 function App () {
-    const [page, setPage] = useState('login');
+    const [apstate, setApstate] = useState({page:'login', isLoggedIn: false});
+
+    const login = (email, pass) => () => {
+        console.log(email, pass)
+        setApstate({isLoggedIn: !apstate.isLoggedIn, page: 'profile'});
+    }
     const renderDynamicPage = page => {
         const dynamicPage = {
             profile: ()=><Profile />,
@@ -20,16 +24,29 @@ function App () {
         
         return dynamicPage[page]()
     }
-    const handleClick = page => event => {
-        setPage(page)
+    const renderHeader = page => {
+        if (page === 'login' || page === 'signin') {
+            return null
+        } else {
+            return <Header activePage={page} handle={handleClick} />
+        } 
+    }
+    const handleClick = page => () => {
+        setApstate({page: page})
     }
 
     return (
         <div className="App">
-          <Header activePage={page} handle={handleClick} />
-          {renderDynamicPage(page)}
+            <Status.Provider value={{
+                login: login,
+                logout: 'METHOD OUT',
+                isLoggedIn: apstate.isLoggedIn
+            }}>
+                {renderHeader(apstate.page)}
+                {renderDynamicPage(apstate.page)}
+            </Status.Provider>
         </div>
     );
 }
-
+export {Status};
 export default App;

@@ -1,16 +1,17 @@
 import React from 'react';
 
-class Input extends React.Component {
-    render() {
-        return (
-            <label className="login-form__label">
-                <div className="login-form__suptitle">{`${this.props.descript}`}</div>
-                <input 
-                    type={`${this.props.type}`} 
-                    className={`login-form__inp ${this.props.setClass}`}/>
-            </label>
-        )
-    }
+function  Input (props) {
+
+    return (
+        <label className={`login-form__label ${props.form === 'registr'?'login-form__label_flex':null}`}>
+            <div className="login-form__suptitle">{`${props.descript}`}</div>
+            <input 
+                ref={el => props.giveRef(el)}
+                name={props.name}
+                type={`${props.type}`} 
+                className={`login-form__inp ${props.setClass}`}/>
+        </label>
+    )
 }
 
 export default Input

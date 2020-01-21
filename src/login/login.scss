@@ -23,6 +23,10 @@
     justify-content: space-between;
     align-items: flex-start;
     padding: 65px 60px 60px 50px;
+    
+    &_registry {
+        height: 570px;
+    }
 }
 .login-descript {
     width: 100%;
@@ -50,6 +54,9 @@
     justify-content: space-between;
     width: 100%;
     flex: 1;
+    &_registry {
+        height: 230px;
+    }
 }
 .login-btn {
     display: flex;
@@ -74,4 +81,26 @@
     font-weight: bold;
     height: 35px;
     width: 100%;
+}
+.login-form__name-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.login-form__inp_userLastName {
+    flex: 0.5
+}
+.login-form__inp_userName_rg {
+    flex: 0.5;
+    margin-right: 15px;  
+}
+.login-form__label {
+    
+    &_flex {
+        margin-right: 15px;
+        flex: 0.5
+    }
+    &:last-child {
+        margin-right: 0;
+    }
 }

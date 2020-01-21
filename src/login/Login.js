@@ -1,19 +1,27 @@
-import React, {useState} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import './login.scss';
-import ButtonAutoriz from '../components/ButtonAutoriz'
-import Input from '../components/Input'
+import FormLogin from '../components/FormLogin'
+import FormRegistry from '../components/FormRegistry'
+
 
 Sign.propTypes = {
-    type: PropTypes.string.isRequired
+    type: PropTypes.oneOf(["login", "signin"]).isRequired,
+    handle: PropTypes.func.isRequired
 }
 
 function Sign(props) {
-    //const [und, setUnd] = useState(0);
 
+    const form = (props) => {
+        if (props.type === 'login') {
+            return <FormLogin handle={props.handle} />
+        }
+        return <FormRegistry handle={props.handle} />
+    }
+    
     return (
         <section className="section-login">
-            <div className="login">
+            <div className={`login ${props.type === 'login'?null:'login_registry'}`}>
                 <div className="login-descript">
                     <h1 className="login-descript__title">{props.type === 'login'?'Войти':'Регистрация'}</h1>
                     <div className="login-descript__subtitle">
@@ -21,26 +29,9 @@ function Sign(props) {
                         <button className="login-descript__subtitle_prefix">{props.type === 'login'?'Зарегистрируйтесь':'Войти'}</button>
                     </div>   
                 </div>
-                <form className="login-form" onSubmit={props.handle('map')}>
-                    <Input descript="Имя пользователя*" type="text" setClass="login-form__inp_userName"/>
-                    <Input descript="Пароль*" type="password" setClass="login-form__inp_userPass"/>
-                    <ButtonAutoriz forms={props.type === 'login'?'Войти':'Зарегистрироваться'}/>
-                </form>
+                {form(props)}
             </div>
-        </section>    
-        /*<section className="section-login">
-            <div className="login">
-                <div className="login-descript">
-                    <h1 className="login-descript__title">Войти</h1>
-                    <button className="login-descript__subtitle">Зарегистрируйтесь</button>
-                </div>
-                <form className="login-form" onSubmit={props.handle('map')}>
-                    <Input descript="Имя пользователя*" type="text" setClass="login-form__inp_userName"/>
-                    <Input descript="Пароль*" type="password" setClass="login-form__inp_userPass"/>
-                    <ButtonAutoriz forms="Войти" />
-                </form>
-            </div>
-        </section>*/
+        </section>
     )
 }
 
