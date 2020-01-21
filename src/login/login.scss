@@ -35,15 +35,15 @@
     margin-bottom: 20px;
 }
 .login-descript__subtitle {
+    color: #505050;
     font-size: 16px;
-    color: #1473e6;
-    cursor: pointer;
-    &::before {
-        content: 'Новый пользователь? ';
-        color: #505050;
-        cursor: default;
+    
+    &_prefix {
+        color: #1473e6;
+        cursor: pointer;
     }
 }
+
 .login-form {
     display: flex;
     flex-direction: column;

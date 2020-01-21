@@ -6,7 +6,7 @@ class SignIn extends React.Component {
         return (
             <div className="default">
                 <h1 className="title">Регистрация</h1>
-                <form onSubmit={()=>this.props.handle('map')}>
+                <form onSubmit={this.props.handle('map')}>
                     <input type="email" placeholder="Введите email"/>
                     <div>
                         <input type="text" placeholder="Введите Имя"/>

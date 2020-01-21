@@ -1,41 +1,35 @@
-import React from 'react';
+import React, {useState} from 'react';
+import PropTypes from 'prop-types';
 import './App.scss';
-import Login from './login/Login';
+import Sign from './login/Login';
 import Profile from './profile/profile';
 import Map from './map/map';
 import SignIN from './signIn/signin';
 import Header from './header/Header';
 
 
-
-class App extends React.Component {
-    state = {activePage: 'login'}
-
-    handleClick = (page)=> {
-        this.setState({
-            activePage: page
-        }) 
-    }
-
-    renderDynamicPage(page) {
-        const obj = {
+function App () {
+    const [page, setPage] = useState('login');
+    const renderDynamicPage = page => {
+        const dynamicPage = {
             profile: ()=><Profile />,
-            login: ()=><Login handle={this.handleClick}/>,
+            login: ()=><Sign type="login" handle={handleClick}/>,
             map: ()=><Map />,
-            signin: ()=><SignIN handle={this.handleClick}/>
+            signin: ()=><Sign type="signin" handle={handleClick}/>
         }
         
-        return obj[page]()
+        return dynamicPage[page]()
+    }
+    const handleClick = page => event => {
+        setPage(page)
     }
 
-    render() {
-        return (
-            <div className="App">
-              <Header activePage={this.state.activePage} handle={this.handleClick} />
-              {this.renderDynamicPage(this.state.activePage)}
-            </div>
-        );
-    } 
+    return (
+        <div className="App">
+          <Header activePage={page} handle={handleClick} />
+          {renderDynamicPage(page)}
+        </div>
+    );
 }
 
 export default App;

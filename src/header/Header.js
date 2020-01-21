@@ -1,35 +1,29 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-class Header extends React.Component {
-    render() {
-        return (
-            <header className="App-header">
-                <button className="App-logo">Loft Taxi</button>
-                <div className="App-nav">
+Header.propTypes = {
+    activePage: PropTypes.string.isRequired,
+    handle: PropTypes.func.isRequired
+}
+
+function Header(props) {
+    const btn = [{type: 'login', value: 'Логин'}, {type: 'map', value: 'Карта'}, {type: 'profile', value: 'Профиль'}, {type: 'signin', value: 'Регистрация'}];
+
+    return (
+        <header className="App-header">
+            <button className="App-logo">Loft Taxi</button>
+            <div className="App-nav">
+                {btn.map(page => 
                     <button 
-                        onClick={e => this.props.handle('login', e.target)} 
-                        className={`App-nav__item ${this.props.activePage === 'login' ? 'active' : null}`}
-                        >Логин
+                        key={page.type}
+                        onClick={props.handle(page.type)} 
+                        className={`App-nav__item ${props.activePage === page.type ? 'active' : null}`}
+                        >{page.value}
                     </button>
-                    <button 
-                        onClick={e => this.props.handle('map', e.target)} 
-                        className={`App-nav__item ${this.props.activePage === 'map' ? 'active' : null}`}
-                        >Карта
-                    </button>
-                    <button 
-                        onClick={e => this.props.handle('profile', e.target)} 
-                        className={`App-nav__item ${this.props.activePage === 'profile' ? 'active' : null}`}
-                        >Профиль
-                    </button>
-                    <button 
-                        onClick={e => this.props.handle('signin', e.target)} 
-                        className={`App-nav__item ${this.props.activePage === 'signin' ? 'active' : null}`}
-                        >Регистрация
-                    </button>
-                </div>
-            </header>
-        )
-    }
+                )}
+            </div>
+        </header>
+    )
 }
 
 export default Header
