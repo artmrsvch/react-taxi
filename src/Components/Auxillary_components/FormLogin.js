@@ -1,36 +1,28 @@
-import React, {useContext} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import ButtonAutoriz from './ButtonAutoriz';
 import Input from './Input';
-import {Status} from '../App'
+
+FormLogin.propTypes = {
+    submit: PropTypes.func.isRequired
+}
 
 function FormLogin(props) {
-    const context = useContext(Status);
-    let inputName;
-    let inputPassword;
+    let node;
 
-    const getRefs = (node) => {
-        
-       node.getAttribute('name') === 'loginName' ? inputName = node : inputPassword = node
-       console.log(inputName, inputPassword)
-    }
-    const submit = (email, pass) => () => {
-        context.login(email.value, pass.value);
-    }
     return (
-        <form className="login-form" onSubmit={submit(inputName, inputPassword)}>
+        <form name="login" ref={el=>node=el} className="login-form" onSubmit={e => props.submit(e, node)}>
             <Input 
                 descript="Имя пользователя*"
                 name="loginName" 
                 type="text" 
                 setClass="login-form__inp_userName"
-                giveRef={getRefs}
             />
             <Input 
                 descript="Пароль*"
                 name="loginPass" 
                 type="password" 
                 setClass="login-form__inp_userPass"
-                giveRef={getRefs}
             />
             <ButtonAutoriz forms="Войти"/>
         </form>

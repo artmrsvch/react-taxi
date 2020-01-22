@@ -1,4 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
+ButtonAutoriz.propTypes = {
+    forms: PropTypes.oneOf(["Войти", "Зарегистрироваться"]).isRequired
+}
 
 function ButtonAutoriz (props){
     return (

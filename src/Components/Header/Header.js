@@ -7,7 +7,7 @@ Header.propTypes = {
 }
 
 function Header(props) {
-    const btn = [{type: 'login', value: 'Логин'}, {type: 'map', value: 'Карта'}, {type: 'profile', value: 'Профиль'}, {type: 'signin', value: 'Регистрация'}];
+    const btn = [{type: 'map', value: 'Карта'}, {type: 'profile', value: 'Профиль'}, {type: 'exit', value: 'Выйти'}];
 
     return (
         <header className="App-header">
