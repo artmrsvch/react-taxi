@@ -15,11 +15,7 @@ function App () {
         
         if (form.getAttribute('name') === 'login') {
             /*Если это форма авторизации, то меняем статус авторизации и рендерим профиль*/
-            if (form.elements.loginName.value !== '' && form.elements.loginPass.value !== '') {
-                setApstate({isLoggedIn: !apstate.isLoggedIn, page: 'profile'});
-            } else {
-                alert('Поля должны быть заполнены')
-            }  
+            setApstate({isLoggedIn: !apstate.isLoggedIn, page: 'profile'});
         }  
     }
 

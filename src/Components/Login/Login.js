@@ -21,9 +21,20 @@ function Sign(props) {
         return <FormRegistry submit={submit} />
     }
 
-    const submit = (e, node) => {
+    const submit = (e, form) => {
         e.preventDefault();
-        context.login(node);
+        if (form.getAttribute('name') === 'login') {
+            /*Валидация формы авторизации*/
+            /*Если поля формы формы заполнены то резолвим метод авторизации*/
+            if (form.elements.loginName.value !== '' && form.elements.loginPass.value !== '') {
+                context.login(form);
+            } else {
+                alert('Поля должны быть заполнены')
+            }  
+        } else {
+            /*Валидация формы регистрации*/
+
+        }
     }
 
     const buttonForModal = (props) => {
