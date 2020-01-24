@@ -1,29 +1,32 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-
-Header.propTypes = {
-    activePage: PropTypes.string.isRequired,
-    handle: PropTypes.func.isRequired
-}
+import React from "react";
+import PropTypes from "prop-types";
 
 function Header(props) {
-    const btn = [{type: 'map', value: 'Карта'}, {type: 'profile', value: 'Профиль'}, {type: 'exit', value: 'Выйти'}];
+    const btn = [
+        { type: "map", value: "Карта" },
+        { type: "profile", value: "Профиль" },
+        { type: "exit", value: "Выйти" }
+    ];
 
     return (
         <header className="App-header">
             <button className="App-logo">Loft Taxi</button>
             <div className="App-nav">
-                {btn.map(page => 
-                    <button 
-                        key={page.type}
-                        onClick={props.handle(page.type)} 
-                        className={`App-nav__item ${props.activePage === page.type ? 'active' : null}`}
-                        >{page.value}
+                {btn.map(({ type, value }) => (
+                    <button
+                        key={type}
+                        onClick={props.handleClick(type)}
+                        className={`App-nav__item ${props.activePage === type ? "active" : null}`}
+                    >
+                        {value}
                     </button>
-                )}
+                ))}
             </div>
         </header>
-    )
+    );
 }
-
-export default Header
+Header.propTypes = {
+    activePage: PropTypes.string.isRequired,
+    handleClick: PropTypes.func.isRequired
+};
+export default Header;

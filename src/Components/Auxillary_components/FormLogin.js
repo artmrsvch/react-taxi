@@ -1,32 +1,31 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import ButtonAutoriz from './ButtonAutoriz';
-import Input from './Input';
+import React from "react";
+import PropTypes from "prop-types";
+import ButtonAutoriz from "./ButtonAutoriz";
+import Input from "./Input";
 
-FormLogin.propTypes = {
-    submit: PropTypes.func.isRequired
-}
-
-function FormLogin(props) {
+function FormLogin({ submit }) {
     let node;
+    const handleSubmit = e => submit(e, node);
 
     return (
-        <form name="login" ref={el=>node=el} className="login-form" onSubmit={e => props.submit(e, node)}>
-            <Input 
+        <form name="login" ref={el => (node = el)} className="login-form" onSubmit={handleSubmit}>
+            <Input
                 descript="Имя пользователя*"
-                name="loginName" 
-                type="text" 
+                name="loginName"
+                type="text"
                 setClass="login-form__inp_userName"
             />
-            <Input 
+            <Input
                 descript="Пароль*"
-                name="loginPass" 
-                type="password" 
+                name="loginPass"
+                type="password"
                 setClass="login-form__inp_userPass"
             />
-            <ButtonAutoriz forms="Войти"/>
+            <ButtonAutoriz forms="Войти" />
         </form>
-    )
+    );
 }
-
-export default FormLogin 
+FormLogin.propTypes = {
+    submit: PropTypes.func.isRequired
+};
+export default FormLogin;
