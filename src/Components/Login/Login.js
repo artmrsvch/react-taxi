@@ -6,23 +6,28 @@ import FormRegistry from "../Auxillary_components/FormRegistry";
 import { Status } from "../../App";
 
 function Sign({ type, handleClick }) {
+    let obj = {};
+    const getValue = (name, value) => {
+        obj[name] = value;
+    };
+
     const context = useContext(Status);
     const form = () => {
         /*Метод рендера формы (авторизации либо регистрации)*/
 
         if (type === "login") {
-            return <FormLogin submit={submit} />;
+            return <FormLogin getValue={getValue} submit={submit} />;
         }
-        return <FormRegistry submit={submit} />;
+        return <FormRegistry getValue={getValue} submit={submit} />;
     };
 
     const submit = (e, form) => {
         e.preventDefault();
-        console.log(e.form);
-        if (form.getAttribute("name") === "login") {
+
+        if (form === "login") {
             /*Валидация формы авторизации*/
-            /*Если поля формы формы заполнены то резолвим метод авторизации*/
-            if (form.elements.loginName.value !== "" && form.elements.loginPass.value !== "") {
+            /*Если поля формы заполнены то резолвим метод авторизации*/
+            if (obj.loginName !== undefined && obj.loginPass !== undefined) {
                 context.login(form);
             } else {
                 alert("Поля должны быть заполнены");

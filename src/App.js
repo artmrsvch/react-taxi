@@ -16,7 +16,7 @@ function App() {
     const login = form => {
         /*Метод получает форму при сабмите*/
 
-        if (form.getAttribute("name") === "login") {
+        if (form === "login") {
             /*Если это форма авторизации, то меняем статус авторизации и рендерим профиль*/
             setAppstate({ isLoggedIn: !isLoggedIn, page: "profile" });
         }
