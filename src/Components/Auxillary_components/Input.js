@@ -23,6 +23,7 @@ Input.propTypes = {
     name: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     setClass: PropTypes.string,
-    form: PropTypes.string
+    form: PropTypes.string,
+    getValue: PropTypes.func.isRequired
 };
 export default Input;

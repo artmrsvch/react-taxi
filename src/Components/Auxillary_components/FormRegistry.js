@@ -3,17 +3,17 @@ import PropTypes from "prop-types";
 import ButtonAutoriz from "./ButtonAutoriz";
 import Input from "./Input";
 
-function FormRegistry({ submit }) {
-    let node;
-    const handleSubmit = e => submit(e, node);
+function FormRegistry({ submit, getValue }) {
+    const handleSubmit = e => submit(e, "registr");
 
     return (
-        <form ref={el => (node = el)} className="login-form" onSubmit={handleSubmit}>
+        <form className="login-form" onSubmit={handleSubmit}>
             <Input
                 name="regMail"
                 descript="Адрес электронной почты"
                 type="email"
                 setClass="login-form__inp_userName"
+                getValue={getValue}
             />
             <div className="login-form__name-block">
                 <Input
@@ -22,6 +22,7 @@ function FormRegistry({ submit }) {
                     descript="Имя"
                     type="text"
                     setClass="login-form__inp_userName"
+                    getValue={getValue}
                 />
                 <Input
                     name="regLastName"
@@ -29,6 +30,7 @@ function FormRegistry({ submit }) {
                     descript="Фамилия"
                     type="text"
                     setClass="login-form__inp_userLastName"
+                    getValue={getValue}
                 />
             </div>
             <Input
@@ -36,6 +38,7 @@ function FormRegistry({ submit }) {
                 descript="Пароль"
                 type="password"
                 setClass="login-form__inp_userPass"
+                getValue={getValue}
             />
             <ButtonAutoriz forms="Зарегистрироваться" />
         </form>
@@ -43,7 +46,8 @@ function FormRegistry({ submit }) {
 }
 
 FormRegistry.propTypes = {
-    submit: PropTypes.func.isRequired
+    submit: PropTypes.func.isRequired,
+    getValue: PropTypes.func.isRequired
 };
 
 export default FormRegistry;

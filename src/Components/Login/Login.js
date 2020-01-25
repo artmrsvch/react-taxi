@@ -6,9 +6,9 @@ import FormRegistry from "../Auxillary_components/FormRegistry";
 import { Status } from "../../App";
 
 function Sign({ type, handleClick }) {
-    let obj = {};
+    let userInfo = {};
     const getValue = (name, value) => {
-        obj[name] = value;
+        userInfo[name] = value;
     };
 
     const context = useContext(Status);
@@ -27,8 +27,8 @@ function Sign({ type, handleClick }) {
         if (form === "login") {
             /*Валидация формы авторизации*/
             /*Если поля формы заполнены то резолвим метод авторизации*/
-            if (obj.loginName !== undefined && obj.loginPass !== undefined) {
-                context.login(form);
+            if (userInfo.loginName !== undefined && userInfo.loginPass !== undefined) {
+                context.login(form, userInfo);
             } else {
                 alert("Поля должны быть заполнены");
             }
