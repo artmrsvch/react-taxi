@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import PropTypes from "prop-types";
 import "./Login.scss";
 import FormLogin from "../Auxillary_components/FormLogin";
@@ -6,43 +6,33 @@ import FormRegistry from "../Auxillary_components/FormRegistry";
 import { Status } from "../../App";
 
 function Sign({ type, handleClick }) {
-    let userInfo = {};
+    const [state, setState] = useState();
+    const context = useContext(Status);
     const getValue = (name, value) => {
-        userInfo[name] = value;
+        setState({ ...state, [name]: value });
     };
 
-    const context = useContext(Status);
     const form = () => {
-        /*Метод рендера формы (авторизации либо регистрации)*/
-
-        if (type === "login") {
-            return <FormLogin getValue={getValue} submit={submit} />;
-        }
-        return <FormRegistry getValue={getValue} submit={submit} />;
+        return type === "login" ? (
+            <FormLogin getValue={getValue} submit={submit} />
+        ) : (
+            <FormRegistry getValue={getValue} submit={submit} />
+        );
     };
 
     const submit = (e, form) => {
         e.preventDefault();
 
-        if (form === "login") {
-            /*Валидация формы авторизации*/
-            /*Если поля формы заполнены то резолвим метод авторизации*/
-            if (userInfo.loginName !== undefined && userInfo.loginPass !== undefined) {
-                context.login(form, userInfo);
-            } else {
-                alert("Поля должны быть заполнены");
-            }
-        } else {
-            /*Валидация формы регистрации*/
-        }
+        return form === "login"
+            ? state.loginName !== undefined && state.loginPass !== undefined
+                ? context.login(form, state)
+                : alert("Поля должны быть заполнены")
+            : context.login(form, state);
     };
 
     const buttonForModal = () => {
-        /*Метод возвращает кнопку с методом и значением в зависимости от типа формы*/
-
         const value = type === "login" ? "Зарегистрируйтесь" : "Войти";
         const handler = type === "login" ? handleClick("signin") : handleClick("login");
-
         return (
             <button className="login-descript__subtitle_prefix" onClick={handler}>
                 {value}

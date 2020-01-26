@@ -42,11 +42,9 @@ function App() {
     };
     const renderHeader = page => {
         /* Метод отрисовывает хедер если юзер авторизован */
-        if (page === "login" || page === "signin") {
-            return null;
-        } else {
-            return <Header activePage={page} handleClick={handleClick} />;
-        }
+        return page === "login" || page === "signin" ? null : (
+            <Header activePage={page} handleClick={handleClick} />
+        );
     };
     const handleClick = page => () => {
         /*Метод запускает рендер страниц*/
