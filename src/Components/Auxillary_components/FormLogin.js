@@ -7,7 +7,7 @@ function FormLogin({ submit, getValue }) {
     const handleSubmit = e => submit(e, "login");
 
     return (
-        <form name="login" className="login-form" onSubmit={handleSubmit}>
+        <form name="login" aria-label="login" className="login-form" onSubmit={handleSubmit}>
             <Input
                 descript="Имя пользователя*"
                 name="loginName"

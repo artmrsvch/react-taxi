@@ -34,14 +34,18 @@ function Sign({ type, handleClick }) {
         const value = type === "login" ? "Зарегистрируйтесь" : "Войти";
         const handler = type === "login" ? handleClick("signin") : handleClick("login");
         return (
-            <button className="login-descript__subtitle_prefix" onClick={handler}>
+            <button
+                aria-label="link-btn"
+                className="login-descript__subtitle_prefix"
+                onClick={handler}
+            >
                 {value}
             </button>
         );
     };
 
     return (
-        <section className="section-login">
+        <section className="section-login" aria-label="sign-section">
             <div className={`login ${type === "login" ? null : "login_registry"}`}>
                 <div className="login-descript">
                     <h1 className="login-descript__title">

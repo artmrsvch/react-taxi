@@ -7,7 +7,7 @@ function FormRegistry({ submit, getValue }) {
     const handleSubmit = e => submit(e, "registr");
 
     return (
-        <form className="login-form" onSubmit={handleSubmit}>
+        <form className="login-form" aria-label="registry" onSubmit={handleSubmit}>
             <Input
                 name="regMail"
                 descript="Адрес электронной почты"

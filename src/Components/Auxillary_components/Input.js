@@ -12,6 +12,7 @@ function Input({ descript, name, type, setClass, form, getValue }) {
                 onChange={doIt}
                 name={name}
                 type={type}
+                aria-label={name}
                 className={`login-form__inp ${setClass}`}
             />
         </label>

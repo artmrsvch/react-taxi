@@ -8,7 +8,11 @@ ButtonAutoriz.propTypes = {
 function ButtonAutoriz({ forms }) {
     return (
         <div className="login-btn">
-            <button className="login-btn__submit" type="submit">{`${forms}`}</button>
+            <button
+                className="login-btn__submit"
+                aria-label={forms === "Войти" ? "loginBtn" : "registerBtn"}
+                type="submit"
+            >{`${forms}`}</button>
         </div>
     );
 }

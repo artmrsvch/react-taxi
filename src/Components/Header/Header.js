@@ -10,9 +10,9 @@ function Header({ activePage, handleClick }) {
     ];
 
     return (
-        <header className="App-header">
+        <header aria-label="header" className="App-header">
             <Logo white="white" />
-            <div className="App-nav">
+            <div aria-label="btn-container" className="App-nav">
                 {btn.map(({ type, value }) => (
                     <button
                         key={type}

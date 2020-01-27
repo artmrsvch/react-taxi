@@ -35,7 +35,8 @@ function App() {
             profile: () => <Profile />,
             login: () => <Sign type="login" handleClick={handleClick} />,
             map: () => <Map />,
-            signin: () => <Sign type="signin" handleClick={handleClick} />
+            signin: () => <Sign type="signin" handleClick={handleClick} />,
+            test: () => "defaultString"
         };
 
         return dynamicPage[page]();
@@ -46,13 +47,14 @@ function App() {
             <Header activePage={page} handleClick={handleClick} />
         );
     };
+    const test = val => val + 6;
     const handleClick = page => () => {
         /*Метод запускает рендер страниц*/
         page !== "exit" ? setAppstate({ page }) : logout(page);
     };
 
     return (
-        <div className="App">
+        <div className="app" id="appId">
             <Status.Provider
                 value={{
                     login,
