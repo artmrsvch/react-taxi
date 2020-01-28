@@ -29,9 +29,5 @@ describe("App", () => {
             const { utils } = setup();
             expect(utils.getByLabelText("loginBtn").tagName).toBe("BUTTON");
         });
-        it("Button is login-submit", () => {
-            const { utils } = setup();
-            expect(utils.getByLabelText("loginBtn").tagName).toBe("BUTTON");
-        });
     });
 });

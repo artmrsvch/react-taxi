@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import PropTypes from "prop-types";
-import "./Login.scss";
 import FormLogin from "../Auxillary_components/FormLogin";
 import FormRegistry from "../Auxillary_components/FormRegistry";
 import { Status } from "../../App";

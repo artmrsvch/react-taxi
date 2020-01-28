@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./App.scss";
 import Sign from "./Components/Login/Login";
 import Profile from "./Components/Profile/Profile";
 import Map from "./Components/Map/Map";

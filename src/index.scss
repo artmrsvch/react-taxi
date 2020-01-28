@@ -1,13 +1,7 @@
-@import "./mixin.scss";
-
-body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
-        "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
-}
+@import "./css/config/mixin.scss";
+@import "./css/config/variable.scss";
+@import "./css/config/layout.scss";
+@import "./css/App.scss";
+@import "./css/Login.scss";
+@import "./css/Map.scss";
+@import "./css/Profile.scss";
