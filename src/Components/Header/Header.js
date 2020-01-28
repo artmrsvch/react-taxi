@@ -1,33 +1,33 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import { Logo } from "loft-taxi-mui-theme";
+import { Status } from "../../App";
 
-function Header({ activePage, handleClick }) {
+function Header() {
+    const context = useContext(Status);
     const btn = [
-        { type: "map", value: "Карта" },
-        { type: "profile", value: "Профиль" },
-        { type: "exit", value: "Выйти" }
+        { type: "/map", value: "Карта" },
+        { type: "/profile", value: "Профиль" },
+        { type: "/exit", value: "Выйти" }
     ];
-
     return (
         <header aria-label="header" className="App-header">
             <Logo white="white" />
-            <div aria-label="btn-container" className="App-nav">
+            <ul aria-label="btn-container" className="App-nav">
                 {btn.map(({ type, value }) => (
-                    <button
-                        key={type}
-                        onClick={handleClick(type)}
-                        className={`App-nav__item ${activePage === type ? "active" : null}`}
-                    >
-                        {value}
-                    </button>
+                    <li className="App-nav__item" key={type}>
+                        <Link
+                            onClick={type === "/exit" ? context.logout() : null}
+                            className="App-nav__link"
+                            to={type}
+                        >
+                            {value}
+                        </Link>
+                    </li>
                 ))}
-            </div>
+            </ul>
         </header>
     );
 }
-Header.propTypes = {
-    activePage: PropTypes.string.isRequired,
-    handleClick: PropTypes.func.isRequired
-};
+
 export default Header;

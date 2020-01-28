@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
-import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import FormLogin from "../Auxillary_components/FormLogin";
 import FormRegistry from "../Auxillary_components/FormRegistry";
 import { Status } from "../../App";
 
-function Sign({ type, handleClick }) {
+function Sign({ match, history }) {
     const [state, setState] = useState();
     const context = useContext(Status);
     const getValue = (name, value) => {
@@ -12,47 +12,74 @@ function Sign({ type, handleClick }) {
     };
 
     const form = () => {
-        return type === "login" ? (
-            <FormLogin getValue={getValue} submit={submit} />
-        ) : (
+        return match.path === "/register" ? (
             <FormRegistry getValue={getValue} submit={submit} />
+        ) : (
+            <FormLogin getValue={getValue} submit={submit} />
         );
     };
-
-    const submit = (e, form) => {
+    const inquiry = async user => {
+        const url =
+            match.path === "/register"
+                ? "https://loft-taxi.glitch.me/register"
+                : "https://loft-taxi.glitch.me/auth";
+        try {
+            const responce = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(user)
+            });
+            const compl = await responce.json();
+            if (compl.success) {
+                context.login(user, history, compl.token);
+            } else {
+                throw new Error(compl.error);
+            }
+        } catch (e) {
+            console.error(e);
+        }
+    };
+    const submit = async (e, form) => {
         e.preventDefault();
-
         return form === "login"
-            ? state.loginName !== undefined && state.loginPass !== undefined
-                ? context.login(form, state)
+            ? state.loginMail !== undefined && state.loginPass !== undefined
+                ? inquiry({
+                      email: state.loginMail,
+                      password: state.loginPass
+                  })
                 : alert("Поля должны быть заполнены")
-            : context.login(form, state);
+            : inquiry({
+                  email: state.regMail,
+                  password: state.regPass,
+                  name: state.regName,
+                  surname: state.regLastName
+              });
     };
 
     const buttonForModal = () => {
-        const value = type === "login" ? "Зарегистрируйтесь" : "Войти";
-        const handler = type === "login" ? handleClick("signin") : handleClick("login");
+        const value = match.path === "/register" ? "Войти" : "Зарегистрируйтесь";
+        const path = match.path === "/register" ? "/login" : "/register";
         return (
-            <button
-                aria-label="link-btn"
-                className="login-descript__subtitle_prefix"
-                onClick={handler}
-            >
+            <Link aria-label="link-btn" className="login-descript__subtitle_prefix" to={path}>
                 {value}
-            </button>
+            </Link>
         );
     };
 
     return (
         <section className="section-login" aria-label="sign-section">
-            <div className={`login ${type === "login" ? null : "login_registry"}`}>
+            <div className={`login ${match.path === "/register" ? "login_registry" : null}`}>
                 <div className="login-descript">
                     <h1 className="login-descript__title">
-                        {type === "login" ? "Войти" : "Регистрация"}
+                        {match.path === "/register" ? "Регистрация" : "Войти"}
                     </h1>
                     <div className="login-descript__subtitle">
                         <span>
-                            {type === "login" ? "Новый пользователь? " : "Уже зарегистрирован? "}
+                            {match.path === "/register"
+                                ? "Уже зарегистрирован? "
+                                : "Новый пользователь? "}
                         </span>
                         {buttonForModal()}
                     </div>
@@ -62,10 +89,5 @@ function Sign({ type, handleClick }) {
         </section>
     );
 }
-
-Sign.propTypes = {
-    type: PropTypes.oneOf(["login", "signin"]).isRequired,
-    handleClick: PropTypes.func.isRequired
-};
 
 export default Sign;

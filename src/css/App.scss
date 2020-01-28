@@ -23,9 +23,16 @@
 }
 .App-nav__item {
     margin-right: 10px;
-
     &:last-child {
         margin-right: 0;
+    }
+}
+.App-nav__link {
+    color: white;
+    text-decoration: none;
+    &:hover {
+        border-bottom: 2px solid red;
+        transition: 0.2s;
     }
 }
 .active {

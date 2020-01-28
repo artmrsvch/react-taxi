@@ -4,7 +4,7 @@ import ButtonAutoriz from "./ButtonAutoriz";
 import Input from "./Input";
 
 function FormRegistry({ submit, getValue }) {
-    const handleSubmit = e => submit(e, "registr");
+    const handleSubmit = e => submit(e, "register");
 
     return (
         <form className="login-form" aria-label="registry" onSubmit={handleSubmit}>
