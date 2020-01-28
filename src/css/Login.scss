@@ -3,7 +3,7 @@
     height: 100%;
     position: relative;
     background-image: url(../img/fon.png);
-    background-color: #323232;
+    background-color: $grey;
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
@@ -16,13 +16,17 @@
     box-sizing: border-box;
     width: 500px;
     height: 475px;
-    background-color: #fff;
-    color: #505050;
+    background-color: white;
+    color: $lightgrey;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
     padding: 65px 60px 60px 50px;
+
+    &_registry {
+        height: 570px;
+    }
 }
 .login-descript {
     width: 100%;
@@ -31,25 +35,28 @@
 .login-descript__title {
     font-size: 36px;
     font-weight: bold;
-    color: #323232;
+    color: $grey;
     margin-bottom: 20px;
 }
 .login-descript__subtitle {
+    color: $lightgrey;
     font-size: 16px;
-    color: #1473e6;
-    cursor: pointer;
-    &::before {
-        content: 'Новый пользователь? ';
-        color: #505050;
-        cursor: default;
+
+    &_prefix {
+        color: $blue;
+        cursor: pointer;
     }
 }
+
 .login-form {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     width: 100%;
     flex: 1;
+    &_registry {
+        height: 230px;
+    }
 }
 .login-btn {
     display: flex;
@@ -59,8 +66,8 @@
 .login-btn__submit {
     font-size: 21px;
     font-weight: bold;
-    color: #000;
-    background-color: #ffc617;
+    color: black;
+    background-color: $yellow;
     border-radius: 7px;
     padding: 15px 50px;
 }
@@ -74,4 +81,25 @@
     font-weight: bold;
     height: 35px;
     width: 100%;
+}
+.login-form__name-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.login-form__inp_userLastName {
+    flex: 0.5;
+}
+.login-form__inp_userName_rg {
+    flex: 0.5;
+    margin-right: 15px;
+}
+.login-form__label {
+    &_flex {
+        margin-right: 15px;
+        flex: 0.5;
+    }
+    &:last-child {
+        margin-right: 0;
+    }
 }
