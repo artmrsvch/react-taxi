@@ -1,43 +1,50 @@
-import React, { useState } from "react";
-import Sign from "./Components/Login/Login";
-import Profile from "./Components/Profile/Profile";
-import Map from "./Components/Map/Map";
-import Header from "./Components/Header/Header";
-import { Route, Switch } from "react-router-dom";
+import React from "react";
+import { connect } from "react-redux";
+import Sign from "./Components/Sign";
+import Profile from "./Components/Profile";
+import Map from "./Components/Map";
+import Header from "./Components/Header";
+import Preloader from "./Components/Auxillary_components/Preloader";
+import Error from "./Components/Auxillary_components/Error";
+import { Route, Redirect, Switch } from "react-router-dom";
+import { fetchRegisterRequest, fetchLoginRequest, logoutAction } from "./state/actions";
 
 const Status = React.createContext();
 
-function App() {
-    const [appstate, setAppstate] = useState({
-        isLoggedIn: false
-    });
-    const { isLoggedIn } = appstate;
-    const login = (user, history, token) => {
-        console.log(user);
-        setAppstate({ isLoggedIn: true }, history.push("./profile"));
+function App({
+    error,
+    isLoggedIn,
+    isLoading,
+    fetchRegisterRequest,
+    fetchLoginRequest,
+    logoutAction
+}) {
+    const login = (user, type, history) => {
+        history.push("/");
+        type === "login" ? fetchLoginRequest(user) : fetchRegisterRequest(user);
     };
-
-    const logout = () => () => {
-        setAppstate({ isLoggedIn: false });
-    };
-
+    const logout = () => () => logoutAction();
     const renderHeader = logged => {
         return logged ? <Header /> : null;
     };
-
+    if (isLoading) return <Preloader />;
+    if (error) return <Error message={error} logout={logout} />;
     return (
         <div className="app" id="appId">
             <Status.Provider value={{ login, logout, isLoggedIn }}>
                 {renderHeader(isLoggedIn)}
                 <Switch>
-                    <Route path="/profile" component={isLoggedIn ? Profile : Sign}></Route>
-                    <Route path="/map" component={isLoggedIn ? Map : Sign}></Route>
-                    <Route path="/register" component={Sign}></Route>
-                    <Route component={Sign}></Route>
+                    <Route path="/profile" component={isLoggedIn ? Profile : Error} />
+                    <Route path="/map" component={isLoggedIn ? Map : Error} />
+                    <Route path="/register" component={Sign} />
+                    <Route path="/login" component={Sign} />
+                    <Redirect to={isLoggedIn ? "/map" : "/login"} />
                 </Switch>
             </Status.Provider>
         </div>
     );
 }
+const mapStateToProps = state => state;
+const mapDispatchToProps = { fetchRegisterRequest, fetchLoginRequest, logoutAction };
 export { Status };
-export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -14,6 +14,7 @@ function Input({ descript, name, type, setClass, form, getValue }) {
                 type={type}
                 aria-label={name}
                 className={`login-form__inp ${setClass}`}
+                required
             />
         </label>
     );

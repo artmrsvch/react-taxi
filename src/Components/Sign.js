@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import FormLogin from "../Auxillary_components/FormLogin";
-import FormRegistry from "../Auxillary_components/FormRegistry";
-import { Status } from "../../App";
+import FormLogin from "./Auxillary_components/FormLogin";
+import FormRegistry from "./Auxillary_components/FormRegistry";
+import { Status } from "../App";
 
 function Sign({ match, history }) {
     const [state, setState] = useState();
@@ -18,44 +18,30 @@ function Sign({ match, history }) {
             <FormLogin getValue={getValue} submit={submit} />
         );
     };
-    const inquiry = async user => {
-        const url =
-            match.path === "/register"
-                ? "https://loft-taxi.glitch.me/register"
-                : "https://loft-taxi.glitch.me/auth";
-        try {
-            const responce = await fetch(url, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(user)
-            });
-            const compl = await responce.json();
-            if (compl.success) {
-                context.login(user, history, compl.token);
-            } else {
-                throw new Error(compl.error);
-            }
-        } catch (e) {
-            console.error(e);
-        }
-    };
-    const submit = async (e, form) => {
+
+    const submit = (e, form) => {
         e.preventDefault();
         return form === "login"
             ? state.loginMail !== undefined && state.loginPass !== undefined
-                ? inquiry({
-                      email: state.loginMail,
-                      password: state.loginPass
-                  })
+                ? context.login(
+                      {
+                          email: state.loginMail,
+                          password: state.loginPass
+                      },
+                      "login",
+                      history
+                  )
                 : alert("Поля должны быть заполнены")
-            : inquiry({
-                  email: state.regMail,
-                  password: state.regPass,
-                  name: state.regName,
-                  surname: state.regLastName
-              });
+            : context.login(
+                  {
+                      email: state.regMail,
+                      password: state.regPass,
+                      name: state.regName,
+                      surname: state.regLastName
+                  },
+                  "register",
+                  history
+              );
     };
 
     const buttonForModal = () => {

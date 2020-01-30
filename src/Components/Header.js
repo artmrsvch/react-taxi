@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Logo } from "loft-taxi-mui-theme";
-import { Status } from "../../App";
+import { Status } from "../App";
 
 function Header() {
     const context = useContext(Status);
