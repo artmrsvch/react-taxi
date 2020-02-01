@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Sign from "./Components/Sign";
 import Profile from "./Components/Profile";
@@ -13,15 +13,19 @@ const Status = React.createContext();
 
 function App() {
     const dispatch = useDispatch();
-    const { error, isLoggedIn, isLoading, cardInfo } = useSelector(state => state)
-    console.log(cardInfo)
+    const localStor = localStorage;
+    const { error, isLoggedIn, isLoading } = useSelector(state => state);
+    const cashLocal = (email, pass) => {
+        localStor.date = JSON.stringify({ email: email, password: pass })
+    }
     const login = (user, type, history) => {
         history.push("/");
-        type === "login" || type === "register"
-            ? type === "login"
-                ? dispatch(fetchLoginRequest(user))
-                : dispatch(fetchRegisterRequest(user))
-            : dispatch(fetchCardRequest(user))
+        if (type === "login" || type === "register") {
+            cashLocal(user.email, user.password);
+            if (type === "login") dispatch(fetchLoginRequest(user))
+            dispatch(fetchRegisterRequest(user))
+        }
+        dispatch(fetchCardRequest(user))
     };
     const logout = () => () => dispatch(logoutAction());
     const renderHeader = logged => {
