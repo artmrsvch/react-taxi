@@ -1,15 +1,19 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { Logo } from "loft-taxi-mui-theme";
-import { Status } from "../App";
+import { useDispatch } from "react-redux";
+import { logoutAction } from "../module/actions";
 
 function Header() {
-    const context = useContext(Status);
+    const dispatch = useDispatch()
     const btn = [
         { type: "/map", value: "Карта" },
         { type: "/profile", value: "Профиль" },
         { type: "/exit", value: "Выйти" }
     ];
+    const handleLink = () => {
+        dispatch(logoutAction())
+    }
     return (
         <header aria-label="header" className="App-header">
             <Logo white="white" />
@@ -17,7 +21,7 @@ function Header() {
                 {btn.map(({ type, value }) => (
                     <li className="App-nav__item" key={type}>
                         <Link
-                            onClick={type === "/exit" ? context.logout() : null}
+                            onClick={type === "/exit" ? handleLink : null}
                             className="App-nav__link"
                             to={type}
                         >

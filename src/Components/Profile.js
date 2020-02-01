@@ -1,19 +1,19 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import FormCard from './Auxillary_components/FormCard';
+import { fetchCardRequest } from "../module/actions";
+import { useDispatch } from "react-redux";
 
-import { Status } from "../App";
-
-function Profile({ history }) {
+function Profile() {
     const [state, setState] = useState()
+    const dispatch = useDispatch()
 
     const getFormInpValue = (name, value) => {
         setState({ ...state, [name]: value });
     }
-    const context = useContext(Status);
 
     const submitFormCard = (e) => {
         e.preventDefault();
-        context.login(state, 'card', history)
+        dispatch(fetchCardRequest(state))
     }
 
     return (
