@@ -23,7 +23,7 @@ input {
     outline: none;
     border-bottom: 2px solid #eaeaea;
     &:focus {
-        border-bottom: 2px solid #1473e6;
+        border-bottom: 2px solid $blue;
     }
 }
 h1,

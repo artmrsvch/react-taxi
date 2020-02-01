@@ -5,6 +5,8 @@ import {
     fetchSuccess,
     fetchFailure,
     fetchLoginRequest,
+    fetchCardRequest,
+    fetchCardSuccess,
     logoutAction
 } from "./actions";
 
@@ -12,7 +14,13 @@ const data = handleActions(
     {
         [logoutAction]: () => [],
         [fetchLoginRequest]: (_state, action) => action.payload,
-        [fetchRegisterRequest]: (_state, action) => action.payload
+        [fetchRegisterRequest]: (_state, action) => action.payload,
+    },
+    []
+);
+const cardInfo = handleActions(
+    {
+        [fetchCardRequest]: (_state, action) => action.payload
     },
     []
 );
@@ -44,6 +52,12 @@ const isLoggedIn = handleActions(
     },
     false
 );
+const isCardAdd = handleActions(
+    {
+        [fetchCardSuccess]: () => true,
+    },
+    false
+);
 
 const error = handleActions(
     {
@@ -53,4 +67,4 @@ const error = handleActions(
     },
     null
 );
-export default combineReducers({ data, isLoading, error, isLoggedIn, token });
+export default combineReducers({ cardInfo, data, isCardAdd, isLoading, error, isLoggedIn, token });

@@ -8,13 +8,13 @@ export default function Error({ message = "Страница не найдена"
                 Вернуться
             </button>
         ) : (
-            <Link to="/" className="btnError">
-                Авторизоваться
+                <Link to="/" className="btnError">
+                    Авторизоваться
             </Link>
-        );
+            );
     };
     return (
-        <div className="app app_preloader">
+        <div className="app app_error">
             <h1 className="titleError">{message}</h1>
             {errorBtn()}
         </div>

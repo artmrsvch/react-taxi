@@ -8,6 +8,11 @@
     &_preloader {
         align-items: center;
         justify-content: center;
+        background-color: $darkgrey;
+    }
+    &_error {
+        align-items: center;
+        justify-content: center;
     }
 }
 .App-nav {
