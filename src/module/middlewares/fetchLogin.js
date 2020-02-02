@@ -1,4 +1,5 @@
 import { fetchFailure, fetchSuccess, fetchLoginRequest } from "../actions";
+import { cashLocal } from '../localStorage'
 
 export const fetchLogin = store => next => action => {
     if (action.type === fetchLoginRequest.toString()) {
@@ -13,6 +14,7 @@ export const fetchLogin = store => next => action => {
             .then(responce => responce.json())
             .then(data => {
                 if (data.success) {
+                    cashLocal(action.payload.email, action.payload.password)
                     store.dispatch(fetchSuccess(data));
                 } else {
                     throw data;

@@ -1,5 +1,6 @@
 import { handleActions } from "redux-actions";
 import { combineReducers } from "redux";
+import { parsLocal } from './localStorage'
 import {
     fetchRegisterRequest,
     fetchSuccess,
@@ -10,13 +11,16 @@ import {
     logoutAction
 } from "./actions";
 
+const initData = parsLocal();
+const initLogged = () => initData.password && initData.email ? true : false;
+
 const data = handleActions(
     {
         [logoutAction]: () => [],
         [fetchLoginRequest]: (_state, action) => action.payload,
         [fetchRegisterRequest]: (_state, action) => action.payload,
     },
-    []
+    initData
 );
 const cardInfo = handleActions(
     {
@@ -50,7 +54,7 @@ const isLoggedIn = handleActions(
         [fetchSuccess]: () => true,
         [fetchFailure]: () => false
     },
-    false
+    initLogged()
 );
 const isCardAdd = handleActions(
     {

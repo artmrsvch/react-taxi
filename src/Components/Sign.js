@@ -8,21 +8,21 @@ function Sign({ match, history }) {
     const dispatch = useDispatch()
     const getValue = (name, value) => setState({ ...state, [name]: value });
 
-    const submit = (e, form) => {
-        e.preventDefault();
+    const submit = (form) => {
         history.push('/')
         return form === "login"
-            ? dispatch(fetchLoginRequest(({ email: state.loginMail, password: state.loginPass })))
+            ? dispatch(fetchLoginRequest(({ email: state.email, password: state.password })))
             : dispatch(fetchRegisterRequest((
                 {
-                    email: state.regMail,
-                    password: state.regPass,
+                    email: state.email,
+                    password: state.password,
                     name: state.regName,
                     surname: state.regLastName
                 }
             )));
     };
-    return <DumbSign path={match.path} getValue={getValue} submit={submit} />;
+
+    return <DumbSign path={match.path} getValue={getValue} submit={submit} />
 }
 
 export default Sign;

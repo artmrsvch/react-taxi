@@ -1,5 +1,9 @@
-const cashLocal = (email, pass) => {
+export const cashLocal = (email, pass) => {
     localStorage.date = JSON.stringify({ email: email, password: pass })
 }
-
-export default cashLocal
+export const parsLocal = () => {
+    let user;
+    console.log(localStorage.date)
+    localStorage.date ? user = JSON.parse(localStorage.date) : user = [];
+    return user
+}
