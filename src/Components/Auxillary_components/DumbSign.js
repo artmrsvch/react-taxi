@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import FormLogin from "./FormLogin";
 import FormRegistry from "./FormRegistry";
@@ -23,9 +24,9 @@ function DumbSign({ path, getValue, submit }) {
     };
     return (
         <section className="section-login" aria-label="sign-section">
-            <div className={`login ${path === "/register" && "login_registry"}`}>
+            <div aria-label="sign-container" className={`login ${path === "/register" && "login_registry"}`}>
                 <div className="login-descript">
-                    <h1 className="login-descript__title">
+                    <h1 aria-label="sign-title" className="login-descript__title">
                         {path === "/register" ? "Регистрация" : "Войти"}
                     </h1>
                     <div className="login-descript__subtitle">
@@ -42,4 +43,11 @@ function DumbSign({ path, getValue, submit }) {
         </section>
     )
 }
+
+DumbSign.propTypes = {
+    submit: PropTypes.func.isRequired,
+    getValue: PropTypes.func.isRequired,
+    path: PropTypes.oneOf(['/login', '/register'])
+};
+
 export default DumbSign

@@ -1,14 +1,25 @@
 import React from "react";
-import { render, fireEvent } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import App from "../App";
+import configureMockStore from "redux-mock-store";
+import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
 
 describe("App", () => {
     describe("Render components at App", () => {
         const setup = () => {
-            const utils = render(<App />);
-            const inputLogin = utils.getByLabelText("loginName");
-            const inputPass = utils.getByLabelText("loginPass");
+            const mockStore = configureMockStore();
+            const store = mockStore({});
+            const utils = render(
+                <BrowserRouter>
+                    <Provider store={store}>
+                        <App />
+                    </Provider>
+                </BrowserRouter>
+            );
+            const inputLogin = utils.getByLabelText("email");
+            const inputPass = utils.getByLabelText("password");
             return {
                 utils,
                 inputLogin,
@@ -21,7 +32,7 @@ describe("App", () => {
             expect(utils).toBeTruthy();
         });
 
-        it("Render FormLogin", () => {
+        it("Render Login page", () => {
             const { utils } = setup();
             expect(utils.getByLabelText("login")).toBeInTheDocument();
         });

@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import mapboxgl from "mapbox-gl";
+// import mapboxgl from "mapbox-gl";
 
-mapboxgl.accessToken =
-    "pk.eyJ1IjoiYXJ0bXJzdmNoIiwiYSI6ImNrNW53YWhiYzBhdGszbW1wdzlndnQ5bHQifQ.4_4_ZfVWfJB2ehd3VRilDA";
+// mapboxgl.accessToken =
+//     "pk.eyJ1IjoiYXJ0bXJzdmNoIiwiYSI6ImNrNW53YWhiYzBhdGszbW1wdzlndnQ5bHQifQ.4_4_ZfVWfJB2ehd3VRilDA";
 
 function Map() {
     let mapContainer;

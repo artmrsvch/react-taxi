@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
 
 ButtonAutoriz.propTypes = {
     forms: PropTypes.oneOf(["Войти", "Зарегистрироваться"]).isRequired
