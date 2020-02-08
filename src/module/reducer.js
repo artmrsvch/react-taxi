@@ -67,7 +67,7 @@ const error = handleActions(
     {
         [logoutAction]: () => null,
         [fetchSuccess]: () => null,
-        [fetchFailure]: (_state, action) => action.payload.error
+        [fetchFailure]: (_state = null, action) => action.payload.error
     },
     null
 );

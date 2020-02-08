@@ -23,7 +23,7 @@ function Profile() {
                     <h1 className="profile-headblock__title">Профиль</h1>
                     <h4 className="profile-headblock__subtitle">Способ оплаты</h4>
                 </div>
-                <FormCard savestate={getFormInpValue} />
+                <FormCard saveState={getFormInpValue} />
                 <div className="profile-wrapbtn">
                     <button onClick={submitFormCard} className="profile-btn" type="button">Сохранить</button>
                 </div>

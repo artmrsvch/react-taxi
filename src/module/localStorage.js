@@ -3,7 +3,6 @@ export const cashLocal = (email, pass) => {
 }
 export const parsLocal = () => {
     let user;
-    console.log(localStorage.date)
     localStorage.date ? user = JSON.parse(localStorage.date) : user = [];
     return user
 }

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logoutAction } from "../../module/actions";
@@ -24,3 +25,8 @@ export default function Error({ message = "Страница недоступна
         </div>
     );
 }
+
+Error.propTypes = {
+    route: PropTypes.string.isRequired,
+    message: PropTypes.string.isRequired,
+};

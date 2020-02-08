@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 function InputCard({ defClass, type, saveState }) {
 
@@ -41,5 +42,11 @@ function InputCard({ defClass, type, saveState }) {
         </div>
     )
 }
+
+InputCard.propTypes = {
+    saveState: PropTypes.func.isRequired,
+    defClass: PropTypes.bool.isRequired,
+    type: PropTypes.string.isRequired,
+};
 
 export default InputCard;
