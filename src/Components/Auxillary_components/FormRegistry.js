@@ -4,12 +4,15 @@ import ButtonAutoriz from "./ButtonAutoriz";
 import Input from "./Input";
 
 function FormRegistry({ submit, getValue }) {
-    const handleSubmit = e => submit(e, "registr");
+    const handleSubmit = e => {
+        e.preventDefault();
+        submit("register");
+    }
 
     return (
         <form className="login-form" aria-label="registry" onSubmit={handleSubmit}>
             <Input
-                name="regMail"
+                name="email"
                 descript="Адрес электронной почты"
                 type="email"
                 setClass="login-form__inp_userName"
@@ -34,7 +37,7 @@ function FormRegistry({ submit, getValue }) {
                 />
             </div>
             <Input
-                name="regPass"
+                name="password"
                 descript="Пароль"
                 type="password"
                 setClass="login-form__inp_userPass"

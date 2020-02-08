@@ -1,0 +1,15 @@
+.inpCard {
+    width: 33%;
+    &_long {
+        width: 100%;
+    }
+}
+.inpCard__input {
+    font-size: 24px;
+    font-weight: bold;
+    width: 100%;
+
+    &:focus {
+        border-bottom: 2px solid $pink;
+    }
+}

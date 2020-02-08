@@ -12,7 +12,9 @@ function ButtonAutoriz({ forms }) {
                 className="login-btn__submit"
                 aria-label={forms === "Войти" ? "loginBtn" : "registerBtn"}
                 type="submit"
-            >{`${forms}`}</button>
+            >
+                {forms}
+            </button>
         </div>
     );
 }

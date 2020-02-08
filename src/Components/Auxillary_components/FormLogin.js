@@ -4,20 +4,22 @@ import ButtonAutoriz from "./ButtonAutoriz";
 import Input from "./Input";
 
 function FormLogin({ submit, getValue }) {
-    const handleSubmit = e => submit(e, "login");
-
+    const handleSubmit = e => {
+        e.preventDefault();
+        submit("login");
+    }
     return (
-        <form name="login" aria-label="login" className="login-form" onSubmit={handleSubmit}>
+        <form aria-label="login" className="login-form" onSubmit={handleSubmit}>
             <Input
-                descript="Имя пользователя*"
-                name="loginName"
-                type="text"
+                descript="Введите email*"
+                name="email"
+                type="email"
                 setClass="login-form__inp_userName"
                 getValue={getValue}
             />
             <Input
                 descript="Пароль*"
-                name="loginPass"
+                name="password"
                 type="password"
                 setClass="login-form__inp_userPass"
                 getValue={getValue}
