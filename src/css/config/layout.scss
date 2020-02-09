@@ -19,9 +19,10 @@ button {
     cursor: pointer;
 }
 input {
+    padding: 0;
     border: none;
     outline: none;
-    border-bottom: 2px solid #eaeaea;
+    border-bottom: 2px solid $slGrey;
     &:focus {
         border-bottom: 2px solid $blue;
     }

@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import mapboxgl from "mapbox-gl";
-
+import FormSelectRoute from './Auxillary_components/FormSelectRoute'
 mapboxgl.accessToken =
     "pk.eyJ1IjoiYXJ0bXJzdmNoIiwiYSI6ImNrNW53YWhiYzBhdGszbW1wdzlndnQ5bHQifQ.4_4_ZfVWfJB2ehd3VRilDA";
 
-function Map() {
+function Map({ adressList }) {
+    adressList = ['Шаверма на невском', 'Москва', 'Кладбище в парке', 'Аэропорт']
     let mapContainer;
     const option = {
         lng: 34.1753,
@@ -23,6 +24,9 @@ function Map() {
 
     return (
         <div className="map-wrapper">
+            <div className="map-route">
+                <FormSelectRoute adressList={adressList} />
+            </div>
             <div className="map" ref={el => (mapContainer = el)}></div>
         </div>
     );
