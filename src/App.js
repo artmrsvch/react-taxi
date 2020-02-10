@@ -9,15 +9,16 @@ import { useSelector } from "react-redux";
 import { Route, Redirect, Switch } from "react-router-dom";
 
 function App() {
-    const { error, isLoggedIn, isLoading, adressList } = useSelector(state => state);
+    const { isCardAdd, cardInfo, error, isLoggedIn, isLoading, adressList } = useSelector(state => state);
+
     if (isLoading) return <Preloader />;
     if (error) return <Error message={error} />;
 
     return (
         <div className="app" id="appId">
             <Switch>
-                <Route path="/profile" render={() => (isLoggedIn ? <><Header /> <Profile /></> : <Error route={true} />)} />
-                <Route path="/map" render={() => (isLoggedIn ? <><Header /> <Map adress={adressList} /></> : <Error route={true} />)} />
+                <Route path="/profile" render={() => (isLoggedIn ? <><Header /> <Profile card={cardInfo} /></> : <Error route={true} />)} />
+                <Route path="/map" render={() => (isLoggedIn ? <><Header /> <Map adress={adressList} isCardAdd={isCardAdd} /></> : <Error route={true} />)} />
                 <Route path="/register" component={Sign} />
                 <Route path="/login" component={Sign} />
                 <Redirect to={isLoggedIn ? "/map" : "/login"} />

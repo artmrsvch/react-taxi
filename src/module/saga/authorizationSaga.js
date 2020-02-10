@@ -8,7 +8,7 @@ export function* authorizationSaga() {
         try {
             const result = yield call(fetchRequests, action, '/auth');
             if (result.success) {
-                cashLocal(action.payload.email, action.payload.password)
+                cashLocal(action.payload.email, action.payload.password, result.token)
                 yield put(fetchSuccess(result));
             } else {
                 throw result;

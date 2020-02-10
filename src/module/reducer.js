@@ -1,6 +1,6 @@
 import { handleActions } from "redux-actions";
 import { combineReducers } from "redux";
-import { parsLocal } from './localStorage'
+import { parsLocal, parsCard } from './localStorage'
 import {
     fetchRegisterRequest,
     fetchSuccess,
@@ -11,8 +11,10 @@ import {
     logoutAction
 } from "./actions";
 
-const initData = parsLocal();
-const initLogged = () => initData.password && initData.email ? true : false;
+const { email, password, token } = parsLocal();
+const initCard = parsCard();
+const initCardAdd = () => Object.keys(initCard).length === 4 ? true : false;
+const initLogged = () => password && email ? true : false;
 
 const data = handleActions(
     {
@@ -20,22 +22,22 @@ const data = handleActions(
         [fetchLoginRequest]: (_state, action) => action.payload,
         [fetchRegisterRequest]: (_state, action) => action.payload,
     },
-    initData
+    { email, password }
 );
 const cardInfo = handleActions(
     {
         [fetchCardRequest]: (_state, action) => action.payload
     },
-    []
+    initCard
 );
-const token = handleActions(
+const tokenSession = handleActions(
     {
         [logoutAction]: () => [],
         [fetchLoginRequest]: () => [],
         [fetchRegisterRequest]: () => [],
         [fetchSuccess]: (_state, action) => action.payload.token
     },
-    []
+    token ? token : []
 );
 const isLoading = handleActions(
     {
@@ -60,7 +62,7 @@ const isCardAdd = handleActions(
     {
         [fetchCardSuccess]: () => true,
     },
-    false
+    initCardAdd()
 );
 
 const error = handleActions(
@@ -71,4 +73,4 @@ const error = handleActions(
     },
     null
 );
-export default combineReducers({ cardInfo, data, isCardAdd, isLoading, error, isLoggedIn, token });
+export default combineReducers({ cardInfo, data, isCardAdd, isLoading, error, isLoggedIn, tokenSession });

@@ -27,6 +27,9 @@ export default function Error({ message = "Страница недоступна
 }
 
 Error.propTypes = {
-    route: PropTypes.string.isRequired,
-    message: PropTypes.string.isRequired,
+    route: PropTypes.bool.isRequired,
+    message: PropTypes.string,
+};
+Error.defaultProps = {
+    message: "Страница недоступна"
 };

@@ -3,7 +3,7 @@ import FormCard from './Auxillary_components/FormCard';
 import { fetchCardRequest } from "../module/actions";
 import { useDispatch } from "react-redux";
 
-function Profile() {
+function Profile({ card }) {
     const [state, setState] = useState()
     const dispatch = useDispatch()
 
@@ -23,7 +23,7 @@ function Profile() {
                     <h1 className="profile-headblock__title">Профиль</h1>
                     <h4 className="profile-headblock__subtitle">Способ оплаты</h4>
                 </div>
-                <FormCard saveState={getFormInpValue} />
+                <FormCard card={card} saveState={getFormInpValue} />
                 <div className="profile-wrapbtn">
                     <button onClick={submitFormCard} className="profile-btn" type="button">Сохранить</button>
                 </div>

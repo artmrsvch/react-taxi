@@ -1,8 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function InputCard({ defClass, type, saveState }) {
-
+function InputCard({ defClass, type, saveState, value }) {
     let inpRef;
     const handleClick = () => () => {
         inpRef.value = '';
@@ -30,6 +29,7 @@ function InputCard({ defClass, type, saveState }) {
     return (
         <div className={`inpCard ${defClass && 'inpCard_long'}`}>
             <input
+                value={value}
                 maxLength={type === "cvc" ? 3 : null}
                 name={type}
                 onChange={setHandler}
