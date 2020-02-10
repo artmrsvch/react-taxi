@@ -24,7 +24,7 @@ input {
     outline: none;
     border-bottom: 2px solid $slGrey;
     &:focus {
-        border-bottom: 2px solid $blue;
+        border-bottom: 1px solid $blue;
     }
 }
 h1,
