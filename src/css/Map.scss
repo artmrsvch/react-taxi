@@ -57,6 +57,19 @@
         }
     }
 }
+.absent-card__title {
+    font-size: 32px;
+    text-align: center;
+}
+.absent-card__link-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.absent-card__link {
+    text-align: center;
+}
 .MuiAutocomplete-popupIndicator {
     position: relative;
 

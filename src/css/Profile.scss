@@ -15,12 +15,10 @@
     background-color: white;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     flex-direction: column;
 }
 .profile-headblock {
-    box-sizing: border-box;
-    padding-top: 6.4%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -37,10 +35,11 @@
 }
 .profile-form {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    flex-direction: column;
     width: 100%;
-    height: 40.35%;
+    height: 54.35%;
 }
 .profile-cardblock {
     box-sizing: border-box;
@@ -48,7 +47,7 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     border-radius: 7px;
     height: 100%;
-    width: 41.27%;
+    width: 48.27%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -67,7 +66,10 @@
     width: 100%;
 }
 .profile-wrapbtn {
-    box-sizing: border-box;
-    padding-bottom: 6.4%;
     width: 20.1%;
+}
+.profile-form__card-inputs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

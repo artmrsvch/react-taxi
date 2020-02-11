@@ -5,18 +5,18 @@ import { useDispatch } from "react-redux";
 import { logoutAction } from "../../module/actions";
 
 export default function Error({ message = "Страница недоступна", route }) {
-    const history = useHistory()
-    const dispatch = useDispatch()
+    const history = useHistory();
+    const dispatch = useDispatch();
     const handleClick = () => {
-        route ? history.push('/') : history.push('/login')
-        dispatch(logoutAction())
-    }
-    const errorBtn = (route) => {
+        route ? history.push("/") : history.push("/login");
+        dispatch(logoutAction());
+    };
+    const errorBtn = route => {
         return (
             <button className="btnError" onClick={handleClick}>
-                {route ? 'Авторизоваться' : 'Вернуться'}
+                {route ? "Авторизоваться" : "Вернуться"}
             </button>
-        )
+        );
     };
     return (
         <div className="app app_error">
@@ -27,9 +27,10 @@ export default function Error({ message = "Страница недоступна
 }
 
 Error.propTypes = {
-    route: PropTypes.bool.isRequired,
-    message: PropTypes.string,
+    route: PropTypes.bool,
+    message: PropTypes.string
 };
 Error.defaultProps = {
-    message: "Страница недоступна"
+    message: "Страница недоступна",
+    route: false
 };
