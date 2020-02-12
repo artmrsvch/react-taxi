@@ -6,7 +6,7 @@ import Header from "./Components/Header";
 import Preloader from "./Components/Auxillary_components/Preloader";
 import Error from "./Components/Auxillary_components/Error";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchGetCardRequest } from "./module/actions";
+import { fetchGetCardRequest, fetchAdressList } from "./module/actions";
 import { Route, Redirect, Switch } from "react-router-dom";
 
 function App() {
@@ -18,13 +18,18 @@ function App() {
         isLoggedIn,
         isLoading,
         adressList,
-        isCardActive
+        isCardActive,
+        selectRoute
     } = useSelector(state => state);
     const dispatch = useDispatch();
     useEffect(() => {
         /* Если карта добавлена на сервере но нет в кэше - бежим на сервер */
         isCardActive && dispatch(fetchGetCardRequest(tokenSession));
-    }, [isLoggedIn]);
+        /* Если карта добавлена, авторизованы, но нет списка адрессов - бежим на сервер */
+        if (isCardAdd && isLoggedIn && adressList.length === 0) {
+            dispatch(fetchAdressList());
+        }
+    }, [isLoggedIn, isCardAdd, adressList]);
 
     if (isLoading) return <Preloader />;
     if (error) return <Error message={error} />;
@@ -49,7 +54,12 @@ function App() {
                     render={() =>
                         isLoggedIn ? (
                             <>
-                                <Header /> <Map adress={adressList} isCardAdd={isCardAdd} />
+                                <Header />{" "}
+                                <Map
+                                    route={selectRoute}
+                                    adressList={adressList}
+                                    isCardAdd={isCardAdd}
+                                />
                             </>
                         ) : (
                             <Error route={true} />

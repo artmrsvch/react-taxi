@@ -5,10 +5,12 @@ import {
     fetchRegisterRequest,
     fetchSuccess,
     fetchFailure,
+    fetchRouteSuccess,
     fetchLoginRequest,
     fetchCardRequest,
     fetchCardSuccess,
     fetchGetCardRequest,
+    fetchGetAdressSucces,
     logoutAction
 } from "./actions";
 
@@ -21,6 +23,7 @@ const initLogged = () => (password && email ? true : false);
 /* Если авторизованы, карта была добавлена, но не отображена в профиле - бежим на сервер */
 const initCardActive = () => (isLoggedIn && parsCardActive() && !isCardAdd ? true : false);
 
+/* Хранит данные авторизации */
 const data = handleActions(
     {
         [logoutAction]: () => [],
@@ -29,6 +32,7 @@ const data = handleActions(
     },
     { email, password }
 );
+/* Хранит данные карты */
 const cardInfo = handleActions(
     {
         [fetchCardRequest]: (_state, action) => action.payload,
@@ -36,6 +40,21 @@ const cardInfo = handleActions(
     },
     initCard
 );
+/* Cписок адрессов */
+const adressList = handleActions(
+    {
+        [fetchGetAdressSucces]: (_state, action) => action.payload
+    },
+    []
+);
+/* Выбранный маршрут */
+const selectRoute = handleActions(
+    {
+        [fetchRouteSuccess]: (_state, action) => action.payload
+    },
+    []
+);
+/* Хранит токен */
 const tokenSession = handleActions(
     {
         [logoutAction]: () => [],
@@ -45,6 +64,7 @@ const tokenSession = handleActions(
     },
     token ? token : []
 );
+/* Отображает процесс ответа сервера. Если true, то прогружает компонент прелоадера */
 const isLoading = handleActions(
     {
         [fetchLoginRequest]: () => true,
@@ -54,6 +74,7 @@ const isLoading = handleActions(
     },
     false
 );
+/* Состояние авторизации авторизации */
 const isLoggedIn = handleActions(
     {
         [logoutAction]: () => false,
@@ -64,12 +85,14 @@ const isLoggedIn = handleActions(
     },
     initLogged()
 );
+/* Добалена ли данные карты на сервер */
 const isCardAdd = handleActions(
     {
         [fetchCardSuccess]: () => true
     },
     initCardAdd()
 );
+/* Нужна для GET запроса на сервер если карта была добавлена но в кэше пусто) */
 const isCardActive = handleActions(
     {
         [fetchCardSuccess]: () => true
@@ -90,7 +113,9 @@ export default combineReducers({
     isCardAdd,
     isCardActive,
     isLoading,
+    selectRoute,
     error,
     isLoggedIn,
+    adressList,
     tokenSession
 });
