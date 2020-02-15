@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Logo } from "loft-taxi-mui-theme";
 import { useDispatch } from "react-redux";
-import { logoutAction } from "../module/actions";
+import { logoutAction } from "../../module/actions";
 
 function Header() {
     const dispatch = useDispatch()

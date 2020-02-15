@@ -1,7 +1,8 @@
 .profile {
+    box-sizing: border-box;
     flex: 1;
     display: flex;
-    align-items: center;
+    padding-top: 5%;
     justify-content: center;
     background-image: url(../img/fon.png);
     background-color: $grey;
@@ -17,6 +18,10 @@
     align-items: center;
     justify-content: space-around;
     flex-direction: column;
+    border-radius: 10px;
+    &_complete {
+        height: 260px;
+    }
 }
 .profile-headblock {
     display: flex;
@@ -32,6 +37,8 @@
 .profile-headblock__subtitle {
     color: $grey;
     font-size: 16px;
+    display: flex;
+    justify-content: center;
 }
 .profile-form {
     display: flex;
@@ -56,6 +63,12 @@
     position: relative;
     margin-right: 3.17%;
 }
+.btn-onload {
+    background: $yellow;
+    padding: 5px;
+    border-radius: 4px;
+    font-weight: bold;
+}
 .profile-btn {
     box-sizing: border-box;
     background-color: $yellow;
@@ -72,4 +85,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.card-add__btn {
+    background: $yellow;
+    font-weight: bold;
+    color: black;
+    padding: 2%;
+    border-radius: 10px;
 }

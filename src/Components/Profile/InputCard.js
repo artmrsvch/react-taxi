@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+
 function InputCard({ defClass, type, saveState, value }) {
     let inpRef;
     const handleClick = () => () => {

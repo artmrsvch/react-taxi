@@ -2,17 +2,15 @@ import { takeEvery, call, put } from "redux-saga/effects";
 import { fetchRoute, fetchRouteSuccess, fetchFailure } from "../actions";
 
 export function* routeSaga() {
-    yield takeEvery(fetchRoute, function*({ payload }) {
+    yield takeEvery(fetchRoute, function* ({ payload }) {
         try {
-            console.log(payload);
             const result = yield call(
                 getRoute,
-                payload.adressRequest.address1,
-                payload.adressRequest.address2
+                payload.address1,
+                payload.address2
             );
-            console.log("result", result);
             if (result) {
-                yield put(fetchRouteSuccess(result));
+                yield put(fetchRouteSuccess({ coords: result, status: true }));
             } else {
                 throw result;
             }

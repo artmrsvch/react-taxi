@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { fetchRegisterRequest, fetchLoginRequest } from "../module/actions";
-import DumbSign from './Auxillary_components/DumbSign'
+import { fetchRegisterRequest, fetchLoginRequest } from "../../module/actions";
+import DumbSign from './DumbSign'
 
 function Sign({ match, history }) {
     const [state, setState] = useState();

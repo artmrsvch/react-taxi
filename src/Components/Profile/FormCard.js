@@ -8,6 +8,7 @@ function FormCard({ card, saveState, submitProfile }) {
         e.preventDefault();
         submitProfile();
     };
+
     const { cardNumber, expiryDate, cardName, cvc } = card;
     return (
         <form className="profile-form" onSubmit={thatSubmitForm}>

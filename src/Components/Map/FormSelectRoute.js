@@ -9,33 +9,38 @@ function FormSelectRoute({ adressList, submit }) {
     useEffect(() => {
         setState({ adressTo: adressList, adressFrom: adressList });
     }, [adressList]);
-    const listFrom = {
+
+    /* Загрузка адресов в автокомплит */
+    const adressListFrom = {
         options: state.adressFrom,
         getOptionLabel: option => option
     };
-    const listTo = {
+    const adressListTo = {
         options: state.adressTo,
         getOptionLabel: option => option
     };
 
-    const handle = (e, type) => {
+    /* Добавление адреса в стейт при клике */
+    const readyToSendRoute = (e, type) => {
         const route = e.target.textContent;
         type === "from"
-            ? setState({ ...state, adressTo: validAdress(route), address1: route })
-            : setState({ ...state, adressFrom: validAdress(route), address2: route });
+            ? setState({ ...state, adressTo: excludeSelectAdress(route), address1: route })
+            : setState({ ...state, adressFrom: excludeSelectAdress(route), address2: route });
     };
     const handleSubmit = e => {
         e.preventDefault();
-        submit(true, { address1: state.address1, address2: state.address2 });
+        submit({ address1: state.address1, address2: state.address2 });
     };
-    const validAdress = route => {
+    /* Исключение адреса из списка если он уже выбран */
+    const excludeSelectAdress = route => {
         let tempArr = adressList.concat();
         tempArr.forEach((adress, index) => {
             route === adress && tempArr.splice(index, 1);
         });
         return tempArr;
     };
-    const validBtnDisabled = (from, to) => {
+    /* Отключение кнопки сабмита если не выбран начальный и конечный адреса*/
+    const btnDisabledBeforeSelect = (from, to) => {
         return from.length !== adressList.length && to.length !== adressList.length ? false : true;
     };
 
@@ -43,9 +48,9 @@ function FormSelectRoute({ adressList, submit }) {
         <form className="form-select" onSubmit={handleSubmit}>
             <div className="form-select__direction">
                 <Autocomplete
-                    {...listFrom}
+                    {...adressListFrom}
                     debug
-                    onChange={e => handle(e, "from")}
+                    onChange={e => readyToSendRoute(e, "from")}
                     renderInput={params => (
                         <TextField {...params} label="Откуда" margin="normal" fullWidth />
                     )}
@@ -53,9 +58,9 @@ function FormSelectRoute({ adressList, submit }) {
             </div>
             <div className="form-select__direction">
                 <Autocomplete
-                    {...listTo}
+                    {...adressListTo}
                     debug
-                    onChange={e => handle(e, "to")}
+                    onChange={e => readyToSendRoute(e, "to")}
                     renderInput={params => (
                         <TextField {...params} label="Куда" margin="normal" fullWidth />
                     )}
@@ -63,7 +68,7 @@ function FormSelectRoute({ adressList, submit }) {
             </div>
             <div className="form-select__btn-wrap">
                 <button
-                    disabled={validBtnDisabled(state.adressFrom, state.adressTo)}
+                    disabled={btnDisabledBeforeSelect(state.adressFrom, state.adressTo)}
                     className="route-wrap_btn"
                     type="submit"
                 >

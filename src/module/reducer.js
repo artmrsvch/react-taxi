@@ -1,6 +1,6 @@
 import { handleActions } from "redux-actions";
 import { combineReducers } from "redux";
-import { parsLocal, parsCard, parsCardActive } from "./localStorage";
+import { parsLocal, parsCard } from "./localStorage";
 import {
     fetchRegisterRequest,
     fetchSuccess,
@@ -9,9 +9,10 @@ import {
     fetchLoginRequest,
     fetchCardRequest,
     fetchCardSuccess,
-    fetchGetCardRequest,
+    fetchGetCardSuccess,
     fetchGetAdressSucces,
-    logoutAction
+    logoutAction,
+    routeReset
 } from "./actions";
 
 const { email, password, token } = parsLocal();
@@ -20,8 +21,6 @@ const initCard = parsCard();
 const initCardAdd = () => initCard !== "" && (Object.keys(initCard).length === 5 ? true : false);
 /* Если в кэше есть логин и пароль - авторизируем */
 const initLogged = () => (password && email ? true : false);
-/* Если авторизованы, карта была добавлена, но не отображена в профиле - бежим на сервер */
-const initCardActive = () => (isLoggedIn && parsCardActive() && !isCardAdd ? true : false);
 
 /* Хранит данные авторизации */
 const data = handleActions(
@@ -36,7 +35,7 @@ const data = handleActions(
 const cardInfo = handleActions(
     {
         [fetchCardRequest]: (_state, action) => action.payload,
-        [fetchGetCardRequest]: (_state, action) => action.payload
+        [fetchGetCardSuccess]: (_state, action) => action.payload
     },
     initCard
 );
@@ -50,9 +49,10 @@ const adressList = handleActions(
 /* Выбранный маршрут */
 const selectRoute = handleActions(
     {
-        [fetchRouteSuccess]: (_state, action) => action.payload
+        [fetchRouteSuccess]: (_state, action) => action.payload,
+        [routeReset]: (_state, action) => action.payload,
     },
-    []
+    { status: false, coords: null }
 );
 /* Хранит токен */
 const tokenSession = handleActions(
@@ -88,17 +88,12 @@ const isLoggedIn = handleActions(
 /* Добалена ли данные карты на сервер */
 const isCardAdd = handleActions(
     {
-        [fetchCardSuccess]: () => true
+        [fetchCardSuccess]: () => true,
+        [fetchGetCardSuccess]: () => true
     },
     initCardAdd()
 );
-/* Нужна для GET запроса на сервер если карта была добавлена но в кэше пусто) */
-const isCardActive = handleActions(
-    {
-        [fetchCardSuccess]: () => true
-    },
-    initCardActive()
-);
+
 const error = handleActions(
     {
         [logoutAction]: () => null,
@@ -111,7 +106,6 @@ export default combineReducers({
     cardInfo,
     data,
     isCardAdd,
-    isCardActive,
     isLoading,
     selectRoute,
     error,
