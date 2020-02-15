@@ -1,8 +1,8 @@
-@import "./css/config/mixin.scss";
-@import "./css/config/variable.scss";
-@import "./css/config/layout.scss";
-@import "./css/App.scss";
-@import "./css/Login.scss";
-@import "./css/Map.scss";
-@import "./css/Profile.scss";
-@import "./css/Auxillary.scss";
+@import "./styles/config/mixin.scss";
+@import "./styles/config/variable.scss";
+@import "./styles/config/layout.scss";
+@import "./styles/App.scss";
+@import "./Components/Sign/Login.scss";
+@import "./Components/Map/Map.scss";
+@import "./Components/Profile/Profile.scss";
+@import "./styles/Auxillary.scss";

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Sign, Profile, Map, Preloader, Error } from './Components/index'
+import { Sign, Profile, Map, Preloader, Error } from './Components/indexComponents'
 import { useSelector, useDispatch } from "react-redux";
 import { fetchAdressList } from "./module/actions";
 import { Route, Redirect, Switch } from "react-router-dom";

@@ -1,7 +1,7 @@
 import React from "react";
 import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import DumbSign from "../../Components/Auxillary_components/DumbSign";
+import DumbSign from "../../Components/Sign/DumbSign";
 import { BrowserRouter } from "react-router-dom";
 
 describe("Sign render", () => {

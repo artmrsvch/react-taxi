@@ -33,6 +33,7 @@ function InputCard({ defClass, type, saveState, value }) {
                 value={value}
                 maxLength={type === "cvc" ? 3 : null}
                 name={type}
+                aria-label={type}
                 onChange={setHandler}
                 className="inpCard__input"
                 ref={el => inpRef = el}

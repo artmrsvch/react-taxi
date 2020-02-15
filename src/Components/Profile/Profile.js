@@ -18,13 +18,13 @@ function Profile() {
         setcardAddComplete(true, dispatch(fetchCardRequest(state)));
 
     };
-    const requsetForDataCard = () => {
+    const requestForDataCard = () => {
         setcardAddComplete(true, dispatch(fetchGetCardRequest(tokenSession)));
     }
     const loadingCardFromServer = () => {
         return (
             <div className="profile-headblock__subtitle">Уже идентифицированы?
-                <button className="btn-onload" type='button' onClick={requsetForDataCard}> загрузить данные </button>
+                <button className="btn-onload" type='button' onClick={requestForDataCard}> загрузить данные </button>
             </div>
         )
     }

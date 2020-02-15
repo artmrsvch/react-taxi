@@ -11,7 +11,7 @@ function FormCard({ card, saveState, submitProfile }) {
 
     const { cardNumber, expiryDate, cardName, cvc } = card;
     return (
-        <form className="profile-form" onSubmit={thatSubmitForm}>
+        <form className="profile-form" aria-label="profile-form" onSubmit={thatSubmitForm}>
             <div className="profile-form__card-inputs">
                 <div className="profile-cardblock profile-cardblock__numbers">
                     <MCIcon />
@@ -61,6 +61,7 @@ function FormCard({ card, saveState, submitProfile }) {
 
 FormCard.propTypes = {
     submitProfile: PropTypes.func.isRequired,
+    saveState: PropTypes.func.isRequired,
     card: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired
 };
 

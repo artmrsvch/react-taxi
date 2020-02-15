@@ -1,7 +1,7 @@
 import React from "react";
 import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import Sign from "../Components/Sign";
+import { Sign } from "../Components/indexComponents";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import configureMockStore from "redux-mock-store";

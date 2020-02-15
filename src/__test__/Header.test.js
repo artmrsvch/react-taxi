@@ -1,7 +1,7 @@
 import React from "react";
-import { render, fireEvent } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import Header from "../Components/Header";
+import Header from "../Components/Header/Header";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import configureMockStore from "redux-mock-store";
