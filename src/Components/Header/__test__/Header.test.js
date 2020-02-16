@@ -1,7 +1,7 @@
 import React from "react";
 import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import Header from "../Components/Header/Header";
+import Header from "../Header";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import configureMockStore from "redux-mock-store";
@@ -16,7 +16,7 @@ describe("Header", () => {
                     <Header />
                 </Provider>
             </BrowserRouter>
-        )
+        );
         return {
             header
         };

@@ -13,7 +13,7 @@ mapboxgl.accessToken =
 
 function Map() {
     const dispatch = useDispatch();
-    const { adressList, isCardAdd, selectRoute } = useSelector(state => state)
+    const { adressList, isCardAdd, selectRoute } = useSelector(state => state);
     let mapContainer;
 
     const option = {
@@ -21,19 +21,19 @@ function Map() {
         lat: 44.4967,
         zoom: 16.45
     };
-    const paveTheWay = (coords) => {
-        dispatch(fetchRoute(coords))
+    const paveTheWay = coords => {
+        dispatch(fetchRoute(coords));
     };
     const removeTheWay = () => {
-        dispatch(routeReset({ status: false, coords: [] }))
-    }
+        dispatch(routeReset({ status: false, coords: [] }));
+    };
     const renderForms = () => {
         if (selectRoute.status) return <CardRequestComplete submit={removeTheWay} />;
         return isCardAdd ? (
             <FormSelectRoute submit={paveTheWay} adressList={adressList} />
         ) : (
-                <AbsentCardData />
-            );
+            <AbsentCardData />
+        );
     };
     useEffect(() => {
         const map = new mapboxgl.Map({
@@ -43,7 +43,7 @@ function Map() {
             zoom: option.zoom
         });
         map.on("load", () => {
-            selectRoute.status && drawRoute(map, selectRoute.coords)
+            selectRoute.status && drawRoute(map, selectRoute.coords);
         });
         return () => {
             map.remove();

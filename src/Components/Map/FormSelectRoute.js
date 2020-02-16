@@ -45,7 +45,7 @@ function FormSelectRoute({ adressList, submit }) {
     };
 
     return (
-        <form className="form-select" onSubmit={handleSubmit}>
+        <form aria-label="select-route-form" className="form-select" onSubmit={handleSubmit}>
             <div className="form-select__direction">
                 <Autocomplete
                     {...adressListFrom}
