@@ -22,6 +22,11 @@
     &_complete {
         height: 260px;
     }
+    @include tablets {
+        box-sizing: border-box;
+        padding: 10px;
+        width: 90vw;
+    }
 }
 .profile-headblock {
     display: flex;
@@ -47,6 +52,9 @@
     flex-direction: column;
     width: 100%;
     height: 54.35%;
+    @include phones {
+        height: auto;
+    }
 }
 .profile-cardblock {
     box-sizing: border-box;
@@ -58,10 +66,17 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    @include phones {
+        width: 100%;
+    }
 }
 .profile-cardblock__numbers {
     position: relative;
     margin-right: 3.17%;
+    @include phones {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
 }
 .btn-onload {
     background: $yellow;
@@ -80,11 +95,18 @@
 }
 .profile-wrapbtn {
     width: 20.1%;
+    @include tablets {
+        width: auto;
+    }
 }
 .profile-form__card-inputs {
     display: flex;
     justify-content: center;
     align-items: center;
+    @include phones {
+        flex-direction: column;
+        margin-bottom: 20px;
+    }
 }
 .card-add__btn {
     background: $yellow;
