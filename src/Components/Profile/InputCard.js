@@ -1,54 +1,27 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-
-function InputCard({ defClass, type, saveState, value }) {
-    let inpRef;
-    const handleClick = () => () => {
-        inpRef.value = '';
-    }
-    const getChange = (e) => {
-        saveState(e.target.name, e.target.value)
-    }
-    const setHandler = (e) => {
-        return type === 'cardNumber' || type === 'expiryDate'
-            ? type === 'cardNumber' ? validCard(e) : validDate(e)
-            : getChange(e);
-    }
-    const validCard = (e) => {
-        let cardCode = inpRef.value.replace(/[^\d]/g, '').substring(0, 16);
-        cardCode = cardCode !== '' ? cardCode.match(/.{1,4}/g).join(' ') : '';
-        inpRef.value = cardCode;
-        getChange(e)
-    }
-    const validDate = (e) => {
-        let cardCode = inpRef.value.replace(/[^\d]/g, '').substring(0, 4);
-        cardCode = cardCode !== '' ? cardCode.match(/.{1,2}/g).join('/') : '';
-        inpRef.value = cardCode;
-        getChange(e)
-    }
+function InputCard({ meta, defClass, input }) {
     return (
-        <div className={`inpCard ${defClass && 'inpCard_long'}`}>
-            <input
-                value={value}
-                maxLength={type === "cvc" ? 3 : null}
-                name={type}
-                aria-label={type}
-                onChange={setHandler}
-                className="inpCard__input"
-                ref={el => inpRef = el}
-                type={type === "cvc" ? "password" : 'text'} />
-            <div className="inpCard__wrapBtn">
-                <button onClick={handleClick} className="inpCard__btn" type="button"></button>
+        <>
+            <div className={`inpCard ${defClass && "inpCard_long"}`}>
+                <input
+                    {...input}
+                    maxLength={input.name === "cvc" ? 3 : null}
+                    aria-label={input.name}
+                    className="inpCard__input"
+                    type={input.name === "cvc" ? "password" : "text"}
+                />
             </div>
-        </div>
-    )
+            {meta.error && meta.visited && !meta.active && (
+                <div style={{ fontSize: "12px", color: "red" }}>{meta.error}</div>
+            )}
+        </>
+    );
 }
 
 InputCard.propTypes = {
-    saveState: PropTypes.func.isRequired,
-    defClass: PropTypes.bool.isRequired,
-    type: PropTypes.string.isRequired,
+    defClass: PropTypes.bool.isRequired
 };
 
 export default InputCard;

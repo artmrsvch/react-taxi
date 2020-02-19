@@ -92,6 +92,9 @@
     font-size: 21px;
     font-weight: bold;
     width: 100%;
+    &:disabled {
+        background-color: $grey;
+    }
 }
 .profile-wrapbtn {
     width: 20.1%;
@@ -103,6 +106,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 60%;
     @include phones {
         flex-direction: column;
         margin-bottom: 20px;
