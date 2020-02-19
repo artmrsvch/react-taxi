@@ -1,32 +1,29 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function Input({ descript, name, type, setClass, form, getValue }) {
-    const doIt = e => getValue(e.target.name, e.target.value);
+function Input({ descript, input, setClass, meta, form }) {
     return (
         <label
             className={`login-form__label ${form === "registr" ? "login-form__label_flex" : null}`}
         >
             <div className="login-form__suptitle">{`${descript}`}</div>
             <input
-                onChange={doIt}
-                name={name}
-                type={type}
-                aria-label={name}
+                {...input}
+                aria-label={input.name}
                 className={`login-form__inp ${setClass}`}
                 required
             />
+            {meta.error && meta.visited && !meta.active && (
+                <div style={{ fontSize: "12px", color: "red" }}>{meta.error}</div>
+            )}
         </label>
     );
 }
 
 Input.propTypes = {
     descript: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
     setClass: PropTypes.string,
-    form: PropTypes.string,
-    getValue: PropTypes.func.isRequired
+    form: PropTypes.string
 };
 Input.defaultProps = {
     setClass: null

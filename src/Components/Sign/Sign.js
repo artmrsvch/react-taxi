@@ -1,28 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { fetchRegisterRequest, fetchLoginRequest } from "../../module/actions";
-import DumbSign from './DumbSign'
+import DumbSign from "./DumbSign";
 
 function Sign({ match, history }) {
-    const [state, setState] = useState();
-    const dispatch = useDispatch()
-    const getValue = (name, value) => setState({ ...state, [name]: value });
+    const dispatch = useDispatch();
 
-    const submit = (form) => {
-        history.push('/')
+    const submit = (userObj, form) => {
+        history.push("/");
         return form === "login"
-            ? dispatch(fetchLoginRequest(({ email: state.email, password: state.password })))
-            : dispatch(fetchRegisterRequest((
-                {
-                    email: state.email,
-                    password: state.password,
-                    name: state.regName,
-                    surname: state.regLastName
-                }
-            )));
+            ? dispatch(fetchLoginRequest())
+            : dispatch(fetchRegisterRequest(userObj));
     };
 
-    return <DumbSign path={match.path} getValue={getValue} submit={submit} />
+    return <DumbSign path={match.path} submit={submit} />;
 }
 
 export default Sign;

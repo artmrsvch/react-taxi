@@ -4,13 +4,13 @@ import { Link } from "react-router-dom";
 import FormLogin from "./FormLogin";
 import FormRegistry from "./FormRegistry";
 
-function DumbSign({ path, getValue, submit }) {
+function DumbSign({ path, submit }) {
     const form = () => {
         return path === "/register" ? (
-            <FormRegistry getValue={getValue} submit={submit} />
+            <FormRegistry submit={submit} />
         ) : (
-                <FormLogin getValue={getValue} submit={submit} />
-            );
+            <FormLogin submit={submit} />
+        );
     };
 
     const buttonForModal = () => {
@@ -24,7 +24,10 @@ function DumbSign({ path, getValue, submit }) {
     };
     return (
         <section className="section-login" aria-label="sign-section">
-            <div aria-label="sign-container" className={`login ${path === "/register" && "login_registry"}`}>
+            <div
+                aria-label="sign-container"
+                className={`login ${path === "/register" && "login_registry"}`}
+            >
                 <div className="login-descript">
                     <h1 aria-label="sign-title" className="login-descript__title">
                         {path === "/register" ? "Регистрация" : "Войти"}
@@ -41,13 +44,12 @@ function DumbSign({ path, getValue, submit }) {
                 {form()}
             </div>
         </section>
-    )
+    );
 }
 
 DumbSign.propTypes = {
     submit: PropTypes.func.isRequired,
-    getValue: PropTypes.func.isRequired,
-    path: PropTypes.oneOf(['/login', '/register'])
+    path: PropTypes.oneOf(["/login", "/register"])
 };
 
-export default DumbSign
+export default DumbSign;
