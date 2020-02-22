@@ -1,0 +1,98 @@
+.map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    overflow: hidden;
+}
+.map-wrapper {
+    flex: 1;
+    position: relative;
+}
+.map-route {
+    position: absolute;
+    z-index: 1;
+    top: 5%;
+    left: 5%;
+    width: 490px;
+    height: 320px;
+    background-color: white;
+}
+.form-select {
+    box-sizing: border-box;
+    padding: 7% 10% 10% 10%;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.form-select__direction {
+    position: relative;
+    width: 100%;
+    height: 17%;
+}
+
+.form-select__btn-wrap {
+    width: 100%;
+}
+.route-wrap_btn {
+    font-size: 21px;
+    width: 100%;
+    padding: 2%;
+    font-weight: bold;
+    color: black;
+    background-color: $yellow;
+    border-radius: 7px;
+    &:active {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+    &:disabled {
+        color: rgba(32, 25, 25, 0.26);
+        background-color: rgba(0, 0, 0, 0.12);
+        &:active {
+            box-shadow: none;
+        }
+    }
+}
+.absent-card__title {
+    font-size: 32px;
+    text-align: center;
+}
+.absent-card__link-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.absent-card__link {
+    text-align: center;
+}
+.MuiAutocomplete-popupIndicator {
+    position: relative;
+
+    &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 2px;
+        height: 70%;
+        background-color: $slGrey;
+    }
+}
+.MuiAutocomplete-endAdornment .MuiAutocomplete-popupIndicatorOpen {
+    &::before {
+        content: "";
+        position: absolute;
+        left: 92%;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 2px;
+        height: 70%;
+        background-color: $slGrey;
+    }
+}
